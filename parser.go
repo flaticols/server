@@ -6,15 +6,33 @@ import (
 	"unicode"
 )
 
+// Parse parses a version string into a Version struct.
+// It accepts versions with or without a 'v' prefix (e.g., "1.2.3" or "v1.2.3").
+// For strict SemVer 2.0.0 compliance without the 'v' prefix, use ParseStrict.
+func Parse(version string) (Version, error) {
+	return parse(version, false)
+}
+
+// ParseStrict parses a version string with strict SemVer 2.0.0 compliance.
+// It rejects versions with a 'v' prefix, as the 'v' prefix is not part of the
+// official SemVer 2.0.0 specification.
+// Use this function when you need to ensure strict adherence to the specification.
+func ParseStrict(version string) (Version, error) {
+	return parse(version, true)
+}
+
 // parse is the internal implementation that handles the actual parsing
 // with an option to allow 'v' prefix
-func Parse(version string) (Version, error) {
+func parse(version string, strict bool) (Version, error) {
 	if version == "" {
 		return Version{}, ErrEmptyVersion
 	}
 
-	// Remove 'v' prefix if present and allowed
+	// Check for 'v' prefix
 	if len(version) > 0 && version[0] == 'v' {
+		if strict {
+			return Version{}, ErrInvalidVPrefix
+		}
 		version = version[1:]
 	}
 
