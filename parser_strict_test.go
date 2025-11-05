@@ -104,7 +104,7 @@ func TestParseStrict(t *testing.T) {
 	}
 }
 
-func TestParseVsParsStrict(t *testing.T) {
+func TestParseVsParseStrict(t *testing.T) {
 	// Test that Parse accepts 'v' prefix but ParseStrict rejects it
 	t.Run("Parse accepts v prefix", func(t *testing.T) {
 		v, err := Parse("v1.2.3")
