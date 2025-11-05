@@ -19,4 +19,5 @@ var (
 	ErrUnknownConstraintOperator = errors.New("unknown constraint operator")
 
 	ErrEmptyVersionComponent = errors.New("version component cannot be empty")
+	ErrInvalidVPrefix        = errors.New("'v' prefix not allowed in strict mode (use Parse instead of ParseStrict)")
 )
