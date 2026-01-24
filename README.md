@@ -5,15 +5,15 @@
 
 A Go package for parsing and comparing semantic versions with **full [SemVer 2.0.0](https://semver.org) compliance**.
 
-## ✅ SemVer 2.0.0 Compliance
+## SemVer 2.0.0 Compliance
 
 This package is **fully compliant** with the [Semantic Versioning 2.0.0 specification](https://semver.org). See [COMPLIANCE.md](COMPLIANCE.md) for detailed compliance information.
 
 **Key compliance features:**
-- ✅ All parsing rules correctly implemented
-- ✅ All precedence rules correctly implemented  
-- ✅ All validation rules correctly implemented
-- ✅ All official examples from semver.org work correctly
+- All parsing rules correctly implemented
+- All precedence rules correctly implemented  
+- All validation rules correctly implemented
+- All official examples from semver.org work correctly
 
 **Optional 'v' prefix support:** While the SemVer spec doesn't include a 'v' prefix, this library optionally accepts it (e.g., `v1.2.3`) for compatibility with common tooling conventions (Git tags, npm, Go modules). Use `ParseStrict()` to enforce strict spec compliance.
 
@@ -186,10 +186,10 @@ if valid {
 
 This package implements all requirements from the [Semantic Versioning 2.0.0 specification](https://semver.org):
 
-✅ **Parsing**: All version formats defined in the spec are correctly parsed  
-✅ **Precedence**: Version comparison follows all precedence rules exactly  
-✅ **Validation**: All invalid versions are correctly rejected  
-✅ **Official Examples**: All examples from semver.org work correctly
+- **Parsing**: All version formats defined in the spec are correctly parsed  
+- **Precedence**: Version comparison follows all precedence rules exactly  
+- **Validation**: All invalid versions are correctly rejected  
+- **Official Examples**: All examples from semver.org work correctly
 
 ### Strict Mode
 
