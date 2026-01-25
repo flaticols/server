@@ -4,13 +4,13 @@ This document details how this package complies with the [Semantic Versioning 2.
 
 ## Compliance Status
 
-✅ **FULLY COMPLIANT** with SemVer 2.0.0 specification
+**FULLY COMPLIANT** with SemVer 2.0.0 specification
 
 ## Specification Requirements
 
 ### 1. Version Format (§2)
 
-✅ **Compliant**: Version format MUST be X.Y.Z where X, Y, and Z are non-negative integers.
+**Compliant**: Version format MUST be X.Y.Z where X, Y, and Z are non-negative integers.
 
 ```go
 v, _ := server.Parse("1.2.3")  // Valid
@@ -19,7 +19,7 @@ v, _ := server.Parse("0.0.0")  // Valid (minimum version)
 
 ### 2. Leading Zeros (§2)
 
-✅ **Compliant**: Version numbers MUST NOT contain leading zeroes.
+**Compliant**: Version numbers MUST NOT contain leading zeroes.
 
 ```go
 _, err := server.Parse("01.2.3")   // Error: leading zeros not allowed
@@ -29,7 +29,7 @@ _, err := server.Parse("1.2.03")   // Error: leading zeros not allowed
 
 ### 3. Prerelease Versions (§9)
 
-✅ **Compliant**: Prerelease version MAY be denoted by appending a hyphen and a series of dot-separated identifiers.
+**Compliant**: Prerelease version MAY be denoted by appending a hyphen and a series of dot-separated identifiers.
 
 ```go
 v, _ := server.Parse("1.0.0-alpha")
@@ -38,21 +38,21 @@ v, _ := server.Parse("1.0.0-0.3.7")
 v, _ := server.Parse("1.0.0-x.7.z.92")
 ```
 
-✅ **Compliant**: Identifiers MUST comprise only ASCII alphanumerics and hyphens [0-9A-Za-z-].
+**Compliant**: Identifiers MUST comprise only ASCII alphanumerics and hyphens [0-9A-Za-z-].
 
 ```go
 v, _ := server.Parse("1.0.0-alpha-beta")  // Valid
 _, err := server.Parse("1.0.0-alpha_1")   // Error: underscore not allowed
 ```
 
-✅ **Compliant**: Identifiers MUST NOT be empty.
+**Compliant**: Identifiers MUST NOT be empty.
 
 ```go
 _, err := server.Parse("1.0.0-")           // Error: empty identifier
 _, err := server.Parse("1.0.0-alpha..beta") // Error: empty identifier between dots
 ```
 
-✅ **Compliant**: Numeric identifiers MUST NOT include leading zeroes.
+**Compliant**: Numeric identifiers MUST NOT include leading zeroes.
 
 ```go
 v, _ := server.Parse("1.0.0-0")     // Valid (single zero)
@@ -62,7 +62,7 @@ v, _ := server.Parse("1.0.0-01alpha") // Valid (alphanumeric, not pure numeric)
 
 ### 4. Build Metadata (§10)
 
-✅ **Compliant**: Build metadata MAY be denoted by appending a plus sign and a series of dot-separated identifiers.
+**Compliant**: Build metadata MAY be denoted by appending a plus sign and a series of dot-separated identifiers.
 
 ```go
 v, _ := server.Parse("1.0.0+build")
@@ -70,9 +70,9 @@ v, _ := server.Parse("1.0.0+20130313144700")
 v, _ := server.Parse("1.0.0-beta+exp.sha.5114f85")
 ```
 
-✅ **Compliant**: Identifiers MUST comprise only ASCII alphanumerics and hyphens [0-9A-Za-z-].
+**Compliant**: Identifiers MUST comprise only ASCII alphanumerics and hyphens [0-9A-Za-z-].
 
-✅ **Compliant**: Build metadata SHOULD be ignored when determining version precedence.
+**Compliant**: Build metadata SHOULD be ignored when determining version precedence.
 
 ```go
 v1, _ := server.Parse("1.0.0+build1")
@@ -82,7 +82,7 @@ server.Compare(v1, v2) // Returns 0 (equal)
 
 ### 5. Precedence Rules (§11)
 
-✅ **Compliant**: All precedence rules are correctly implemented.
+**Compliant**: All precedence rules are correctly implemented.
 
 #### 5.1 Major, Minor, Patch Precedence
 
@@ -95,7 +95,7 @@ v1.LessThan(v2) // true
 
 #### 5.2 Prerelease Precedence
 
-✅ **Compliant**: Prerelease versions have lower precedence than normal versions.
+**Compliant**: Prerelease versions have lower precedence than normal versions.
 
 ```go
 // 1.0.0-alpha < 1.0.0
@@ -106,7 +106,7 @@ v1.LessThan(v2) // true
 
 #### 5.3 Prerelease Comparison
 
-✅ **Compliant**: Official example from semver.org:
+**Compliant**: Official example from semver.org:
 
 ```go
 // 1.0.0-alpha < 1.0.0-alpha.1 < 1.0.0-alpha.beta < 1.0.0-beta < 
@@ -123,7 +123,8 @@ All comparisons work correctly:
 
 ### 'v' Prefix (Non-Standard Extension)
 
-⚠️ **Intentional Deviation**: This library accepts an optional 'v' prefix on version strings.
+> [!WARNING]
+> **Intentional Deviation**: This library accepts an optional 'v' prefix on version strings.
 
 **Rationale**: While the SemVer 2.0.0 specification only defines versions in the format `X.Y.Z[-prerelease][+metadata]`, many tools (Git tags, npm, Go modules) commonly use a `v` prefix (e.g., `v1.2.3`).
 
